@@ -1,0 +1,1 @@
+#include "BlockOutline.h";BlockOutline::BlockOutline() : IModule(0, Category::VISUAL, "Outlines the block your looking at") {};const char* BlockOutline::getModuleName() { return ("BlockOutline"); };void BlockOutline::onPreRender(C_MinecraftUIRenderContext* renderCtx) {};
