@@ -50,7 +50,7 @@ void Welcome::onPostRender(C_MinecraftUIRenderContext* renderCtx) {
 			break;
 
 		case 2:
-			name = u8"ÄãºÃ£¡ " + playerName + "   " + str_time;
+			name = u8"ÄãºÃ£¬²ÙÄãÂè£¡ " + playerName + "   " + str_time;
 			break;
 
 		case 3:

@@ -255,6 +255,7 @@
     <ClCompile Include="BadMan\Config\AccountInformation.cpp" />
     <ClCompile Include="BadMan\Config\ConfigManager.cpp" />
     <ClCompile Include="BadMan\Config\SettingManager.cpp" />
+    <ClCompile Include="BadMan\Module\Modules\Combat\AnchorAura.cpp" />
     <ClCompile Include="BadMan\Module\Modules\Combat\AntiKAFag.cpp" />
     <ClCompile Include="BadMan\Module\Modules\Combat\AutoButton.cpp" />
     <ClCompile Include="BadMan\Module\Modules\Combat\AutoCrystal.cpp" />
@@ -422,6 +423,7 @@
     <ClCompile Include="Utils\VoxelIntersector.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BadMan\Module\Modules\Combat\AnchorAura.h" />
     <ClInclude Include="Memory\pch.h" />
     <ClInclude Include="BadMan\Command\CommandMgr.h" />
     <ClInclude Include="BadMan\Command\Commands\BindCommand.h" />

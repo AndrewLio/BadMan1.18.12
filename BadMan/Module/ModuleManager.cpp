@@ -43,6 +43,7 @@ void ModuleManager::initModules() {
 		moduleList.push_back(std::shared_ptr<IModule>(new BowAimbot()));
 		moduleList.push_back(std::shared_ptr<IModule>(new AutoTrap()));
 		moduleList.push_back(std::shared_ptr<IModule>(new Killaura()));
+		moduleList.push_back(std::shared_ptr<IModule>(new AnchorAura()));
 		moduleList.push_back(std::shared_ptr<IModule>(new HitBoxes()));
 		moduleList.push_back(std::shared_ptr<IModule>(new HoleFill()));
 		moduleList.push_back(std::shared_ptr<IModule>(new BowSpam()));

@@ -20,6 +20,7 @@
 #include "Modules/Combat/AutoCrystal.h"
 #include "Modules/Combat/AutoClicker.h"
 #include "Modules/Combat/TriggerBot.h"
+#include "Modules/Combat/AnchorAura.h"
 #include "Modules/Combat/TargetDown.h"
 #include "Modules/Combat/AntiKAFag.h"
 #include "Modules/Combat/Criticals.h"
