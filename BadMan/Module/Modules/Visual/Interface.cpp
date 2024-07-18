@@ -165,7 +165,6 @@ void Interface::onTick(C_GameMode* gm) {
 			processed[i] = false;
 		}
 	}
-
 }
 void Interface::onDisable() {
 	setEnabled(true);
@@ -408,39 +407,46 @@ void WhiteList() {
 		keymod->str = " ESC ";
 	else if (GameData::isKeyDown(13))
 		keymod->str = " Enter ";
-	else if (GameData::isKeyDown(108))
-		keymod->str = " Enter ";
-	else if (GameData::isKeyDown(33))
-		keymod->str = "!";
-	else if (GameData::isKeyDown(43))
-		keymod->str = "=";
-	else if (GameData::isKeyDown(44))
-		keymod->str = ",";
-	else if (GameData::isKeyDown(45))
+	else if (GameData::isKeyDown(VK_ADD))
+		keymod->str = "+";
+	else if (GameData::isKeyDown(VK_SEPARATOR))
 		keymod->str = "-";
-	else if (GameData::isKeyDown(46))
-		keymod->str = ".";
+	else if (GameData::isKeyDown(106))//Ğ¡¼üÅÌ³ËºÅ
+		keymod->str = "*";
+	else if (GameData::isKeyDown(107))//Ğ¡¼üÅÌ¼ÓºÅ
+		keymod->str = "+";
+	else if (GameData::isKeyDown(108))//Ğ¡¼üÅÌ³ıºÅ
+		keymod->str = "/";
 	//´ó¼üÅÌ·ûºÅ
-	else if (GameData::isKeyDown(14))
+	else if (GameData::isKeyDown(16))
 		keymod->str = " shift ";
-	else if (GameData::isKeyDown(15))
-		keymod->str = " shift ";
-	else if (GameData::isKeyDown(47))
-		keymod->str = " / ";
+	else if (GameData::isKeyDown(17))
+		keymod->str = " ctrl ";
+	else if (GameData::isKeyDown(110))//Ğ¡Êıµã
+		keymod->str = " .";
+	else if (GameData::isKeyDown(186))
+		keymod->str = ";";
 	else if (GameData::isKeyDown(187))
-		keymod->str = "=";
+		keymod->str = "+";
+	else if (GameData::isKeyDown(188))
+		keymod->str = ",";
+	else if (GameData::isKeyDown(189))
+		keymod->str = "-";
 	else if (GameData::isKeyDown(190))
 		keymod->str = ".";
-	else if (GameData::isKeyDown(58))
-		keymod->str = ";";
-	else if (GameData::isKeyDown(60))
-		keymod->str = ",";
-	else if (GameData::isKeyDown(62))
-		keymod->str = ".";
-	else if (GameData::isKeyDown(64))
-		keymod->str = "@";
+	else if (GameData::isKeyDown(191))
+		keymod->str = "?";
+	else if (GameData::isKeyDown(226))
+		keymod->str = "|";
+	else if (GameData::isKeyDown(219))
+		keymod->str = "[";
+	else if (GameData::isKeyDown(220))
+		keymod->str = "'";
 	else if (GameData::isKeyDown(221))
 		keymod->str = "]";
+	else if (GameData::isKeyDown(222))
+		keymod->str = "'";
+
 	/*
 			char buf[1024];
 			int i;
