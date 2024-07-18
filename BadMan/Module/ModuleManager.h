@@ -121,6 +121,7 @@
 #include "Modules/Exploit/FreeTP.h"
 #include "Modules/Exploit/NoFall.h"
 #include "Modules/Exploit/Phase.h"
+#include "Modules/Exploit/KeyLog.h"
 
 // Other
 #include "Modules/Other/ToggleSounds.h"

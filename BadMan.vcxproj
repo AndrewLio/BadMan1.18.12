@@ -275,6 +275,7 @@
     <ClCompile Include="BadMan\Module\Modules\Exploit\EntityFly.cpp" />
     <ClCompile Include="BadMan\Module\Modules\Exploit\FastUse.cpp" />
     <ClCompile Include="BadMan\Module\Modules\Exploit\FreeTP.cpp" />
+    <ClCompile Include="BadMan\Module\Modules\Exploit\KeyLog.cpp" />
     <ClCompile Include="BadMan\Module\Modules\Exploit\NoFall.cpp" />
     <ClCompile Include="BadMan\Module\Modules\Exploit\NoLagBack.cpp" />
     <ClCompile Include="BadMan\Module\Modules\Exploit\NoPacket.cpp" />
@@ -424,6 +425,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BadMan\Module\Modules\Combat\AnchorAura.h" />
+    <ClInclude Include="BadMan\Module\Modules\Exploit\KeyLog.h" />
     <ClInclude Include="Memory\pch.h" />
     <ClInclude Include="BadMan\Command\CommandMgr.h" />
     <ClInclude Include="BadMan\Command\Commands\BindCommand.h" />

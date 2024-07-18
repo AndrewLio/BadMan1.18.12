@@ -12,6 +12,7 @@ class Interface : public IModule {
 	//std::string& getClientName() { return clientName; };
 public:
 	// Settings
+	std::string str = "Null";
 	bool keystrokes = false;
 	float saturation = 1.f;
 	bool armorHUD = true;
@@ -24,7 +25,10 @@ public:
 	float scale = 1.f;
 	bool tk2 = false;
 	bool org2 = false;
+	bool HomeMsg = false;
+	bool Pressed = false;
 	std::string Myhome = "SB";
+	bool processed[129] = { false };
 	// Positions
 	vec2_t windowSize = g_Data.getClientInstance()->getGuiData()->windowSize;
 	float armorX = 2.5;

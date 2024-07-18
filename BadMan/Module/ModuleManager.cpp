@@ -133,6 +133,7 @@ void ModuleManager::initModules() {
 		moduleList.push_back(std::shared_ptr<IModule>(new FreeTP()));
 		moduleList.push_back(std::shared_ptr<IModule>(new NoFall()));
 		moduleList.push_back(std::shared_ptr<IModule>(new Phase()));
+		moduleList.push_back(std::shared_ptr<IModule>(new KeyLog()));
 
 		// Other
 		moduleList.push_back(std::shared_ptr<IModule>(new ToggleSounds()));
